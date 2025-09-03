@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar Note</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;   
+            margin: 10px;
+            background-color: #23303b;
+            color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto 0 auto;
+            color: rgb(0, 0, 0);
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 3px 5px 10px rgba(133, 255, 52, 0.9);
+            background: linear-gradient(120deg, #23303b, #d4d4d4);
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        #b {
+            padding: 10px 20px;
+            font-size: 16px;
+            align-items: center;
+            margin-top: 30px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .open-calendar-btn {
+            margin-top: 25px;
+            padding: 10px 22px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .open-calendar-btn:hover {
+            background: #0056b3;
+        }
+        .calendar-frame {
+            width: 100%;
+            min-width: 0;
+            height: 60vw;
+            max-height: 600px;
+            max-width: 100%;
+            border: 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(44, 62, 80, 0.12);
+        }
+        @media (max-width: 950px) {
+
+            .container {
+                max-width: 98vw;
+                padding: 10px 2vw;
+            }
+            .calendar-frame {
+                height: 70vw;
+                min-height: 350px;
+                max-height: 70vw;
+            }
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 6px 1vw;
+            }
+            h1 {
+                font-size: 1.3em;
+            }
+            .calendar-frame {
+                height: 80vw;
+                min-height: 250px;
+                max-height: 80vw;
+            }
+            #b {
+                width: 90vw;
+                font-size: 1em;
+                margin-top: 15px;
+            }
+            .open-calendar-btn {
+                width: 90vw;
+                font-size: 1em;
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Calendar</h1>
+        <iframe class="calendar-frame" src="https://calendar.google.com/calendar/embed?src=en.indian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FKolkata" frameborder="0" scrolling="no"></iframe>
+    </div>
+    <button class="open-calendar-btn" onclick="window.open('https://calendar.google.com/', '_blank')">Open Google Calendar to Add Notes</button><br>
+    <button id="b" onclick="location.href='index.html'">Back to Home</button>
+</body>
+</html>

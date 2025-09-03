@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pomodoro Timer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            background-color: #23303b;
+            color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 60px auto 0 auto;
+            color: #23303b;
+            padding: 30px 20px 20px 20px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 3px 5px 10px rgba(133, 255, 52, 0.9);
+            background: linear-gradient(120deg, #23303b, #d4d4d4);
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #28a745;
+        }
+        .timer {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #23303b;
+            font-weight: bold;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        .controls button {
+            padding: 10px 24px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+  
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 2px 6px rgba(40, 167, 69, 0.08);
+        }
+        .controls button:hover {
+            background-color: #218838;
+            transform: translateY(-2px) scale(1.03);
+        }
+        #b {
+            background-color: #0077b6;
+            color: white;
+            padding: 10px 15px;
+            margin: 10px auto 0 auto;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            font-size: 20px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        #b:hover {
+            background-color: #218838;
+            transform: scale(1.03);
+        }
+        @media (max-width: 600px) {
+            body {
+                margin: 8px;
+            }
+            .container {
+                padding: 14px;
+            }
+            .timer {
+                font-size: 32px;
+            }
+            .controls button {
+                width: 90vw;
+                font-size: 1em;
+                margin-top: 15px;
+            }
+            #b {
+                width: 90vw;
+                font-size: 1em;
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pomodoro Timer</h1>
+        <div class="timer">
+            <span id="minutes">25</span>:<span id="seconds">00</span>
+        </div>
+        <div class="controls">
+            <button id="start">Start</button>
+            <button id="pause">Pause</button>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+    <button id="b" onclick="location.href='index.html'">Back to Home</button>
+    <script>
+        let minutes = document.getElementById('minutes');
+        let seconds = document.getElementById('seconds');
+        let startButton = document.getElementById('start');
+        let pauseButton = document.getElementById('pause');
+        let resetButton = document.getElementById('reset');
+        let interval;
+        let totalSeconds = 25 * 60; // Default 25 minutes
+
+        function getValidTime() {
+            let mins;
+            do {
+                mins = prompt("Enter the time in minutes", "25");
+                if (mins === null) return null; // Cancel pressed
+                mins = parseInt(mins);
+            } while (isNaN(mins) || mins <= 0);
+            return mins * 60;
+        }
+
+        function updateTimer() {
+            let mins = Math.floor(totalSeconds / 60);
+            let secs = totalSeconds % 60;
+            minutes.textContent = mins < 10 ? '0' + mins : mins;
+            seconds.textContent = secs < 10 ? '0' + secs : secs;
+        }
+
+        function startTimer() {
+            if (!interval) {
+                interval = setInterval(() => {
+                    if (totalSeconds > 0) {
+                        totalSeconds--;
+                        updateTimer();
+                    } else {
+                        clearInterval(interval);
+                        interval = null;
+                        alert("Time's up!");
+                    }
+                }, 1000);
+            }
+        }
+
+        function pauseTimer() {
+            clearInterval(interval);
+            interval = null;
+        }
+
+        function resetTimer() {
+            clearInterval(interval);
+            interval = null;
+            let newTime = getValidTime();
+            if (newTime !== null) {
+                totalSeconds = newTime;
+            }
+            updateTimer();
+        }
+
+        startButton.addEventListener('click', startTimer);
+        pauseButton.addEventListener('click', pauseTimer);
+        resetButton.addEventListener('click', resetTimer);
+
+        updateTimer();
+    </script>
+</body>
+</html>
